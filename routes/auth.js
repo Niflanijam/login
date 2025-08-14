@@ -21,7 +21,7 @@ router.post('/register', async (req, res) => {
   }
 });
 
-// Login the new user
+// Login the new user to the account
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
   try {
