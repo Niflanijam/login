@@ -5,7 +5,7 @@ const User = require('../models/user');
 const router = express.Router();
 const authMiddleware = require('../middleware/authMiddleware');
 
-// Register
+// Register the new account
 router.post('/register', async (req, res) => {
   const { username, email, password } = req.body;
   try {
@@ -21,7 +21,7 @@ router.post('/register', async (req, res) => {
   }
 });
 
-// Login
+// Login the new user
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
   try {
