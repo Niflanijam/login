@@ -14,5 +14,12 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
 .catch(err => console.log(err));
 
 app.use('/api/auth', authRoutes);
+const dietRoutes = require('./routes/diet');
+app.use('/diet-plan', dietRoutes);
 
 app.listen(5000, () => console.log('Server running on port 5000'));
+
+
+
+
+
