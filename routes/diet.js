@@ -34,7 +34,7 @@ router.post("/", async (req, res) => {
       diet: "balanced"
     };
 
-    // Call the new Edamam Meal Planner endpoint
+    // Call the new Edamam Meal Planner endpoint  free api used from edamam
     const response = await axios.post(
       `https://api.edamam.com/api/recipes/v2`,
       data,
