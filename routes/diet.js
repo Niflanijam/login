@@ -22,7 +22,7 @@ function calculateCalories({ weight, height, age, gender, activityLevel }) {
 
   return Math.round(bmr * activityMultipliers[activityLevel]);
 }
-
+/*
 router.post("/", async (req, res) => {
   try {
     const { weight, height, age, gender, activityLevel } = req.body;
@@ -51,6 +51,31 @@ router.post("/", async (req, res) => {
     res.json({
       calories,
       mealPlan: response.data.meals || []
+    });
+  } catch (error) {
+    console.error(error.response?.data || error.message);
+    res.status(500).json({ error: "Failed to generate diet plan" });
+  }
+});*/
+router.post("/", async (req, res) => {
+  try {
+    const { weight, height, age, gender, activityLevel } = req.body;
+    const calories = calculateCalories({ weight, height, age, gender, activityLevel });
+
+    const response = await axios.get("https://api.edamam.com/api/recipes/v2", {
+      params: {
+        type: "public",
+        q: "meal", // you can adjust: chicken, rice, etc.
+        app_id: EDAMAM_APP_ID,
+        app_key: EDAMAM_APP_KEY,
+        calories: `${calories}-${calories + 200}`,
+        diet: "balanced"
+      }
+    });
+
+    res.json({
+      calories,
+      mealPlan: response.data.hits || []
     });
   } catch (error) {
     console.error(error.response?.data || error.message);
